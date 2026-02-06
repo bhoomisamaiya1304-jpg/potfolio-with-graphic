@@ -1,0 +1,155 @@
+/* --- THEME VARIABLES --- */
+:root {
+    /* Earthy & Subtle Aesthetic Palette */
+    --bg: #dd5f54;           /* Deep Espresso */
+    --text: #f2e8da;         /* Bone/Cream */
+    --primary: #c98e82;      /* Muted Terracotta */
+    --secondary: #e8d5c4;    /* Warm Sand */
+    --accent-tertiary: #6b2d26; /* Deep Burnt Sienna */
+    --glass: rgba(242, 232, 218, 0.03);
+    --border: rgba(201, 142, 130, 0.2);
+    --grid-color: rgba(232, 213, 196, 0.05);
+    --nav-bg: rgba(26, 15, 14, 0.85);
+}
+
+[data-theme="light"] {
+    --bg: #f2e8da;           /* Cream Background */
+    --text: #1a0f0e;         /* Espresso Text */
+    --glass: rgba(107, 45, 38, 0.05);
+    --border: rgba(26, 15, 14, 0.1);
+    --nav-bg: rgba(242, 232, 218, 0.85);
+}
+
+/* --- RESET & BASE --- */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    cursor: none; /* Hide default cursor for the custom one */
+} 
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    transition: background 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+h1, h2, h3, .logo { 
+    font-family: 'Space Grotesk', sans-serif; 
+    text-transform: uppercase;
+}
+
+/* --- BACKGROUND GRAPHICS & CURSOR --- */
+#canvas-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none;
+    opacity: 0.4;
+}
+
+
+.shape {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -2;
+    opacity: 0.2;
+    animation: float 25s infinite alternate;
+}
+
+.s1 {
+    width: 600px;
+    height: 600px;
+    background: var(--primary);
+    top: -20%;
+    left: -10%;
+}
+
+.s2 {
+    width: 500px;
+    height: 500px;
+    background: var(--accent-tertiary);
+    bottom: -10%;
+    right: -10%;
+}
+
+@keyframes float {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100px, 50px); }
+}
+
+/* --- WORK CARD GRAPHICS (3D EFFECT) --- */
+.work-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 2rem; 
+    margin-top: 3rem; 
+}
+
+.project-card { 
+    width: 100%; 
+    aspect-ratio: 16/10; 
+    background-size: cover; 
+    background-position: center;
+    border-radius: 24px; 
+    display: flex; 
+    align-items: flex-end; 
+    padding: 40px; 
+    overflow: hidden; 
+    cursor: pointer; 
+    transform-style: preserve-3d;
+    border: 1px solid var(--border);
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+
+.project-card::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(26, 15, 14, 0.85), transparent);
+    z-index: 1;
+}
+
+.project-content { 
+    position: relative; 
+    z-index: 2; 
+    transform: translateZ(60px); /* Pushes text forward for 3D effect */
+    color: #fff; 
+}
+
+.project-card:hover {
+    border-color: var(--primary);
+}
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s ease;
+    filter: grayscale(40%) contrast(90%);
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.08);
+    filter: grayscale(0%);
+}
+
+.project-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(transparent, rgba(28, 20, 18, 0.9));
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.project-card:hover .project-info {
+    transform: translateY(0);
+    opacity: 1;
+}

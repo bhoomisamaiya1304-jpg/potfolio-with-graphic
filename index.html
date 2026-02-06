@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhoomi Samaiya | Visual Systems & AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+
+    <canvas id="canvas-bg"></canvas>
+    <div id="custom-cursor"></div>
+    <div class="scroll-progress" id="progress-bar"></div>
+    
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+
+    <nav>
+        <div class="logo" style="font-size: 1.5rem; font-weight: 700;">BS.</div>
+        <div class="nav-links">
+            <a href="#home" class="mag-item">Home</a>
+            <a href="#about" class="mag-item">About</a>
+            <a href="#skills" class="mag-item">Toolkit</a>
+            <a href="#work" class="mag-item">Work</a>
+            <button class="theme-btn" onclick="toggleTheme()">◑ MODE</button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 id="hero-name">BHOOMI<br>SAMAIYA</h1>
+        <p>Visual Communication Designer merging Typography, Print Systems, and Generative AI to craft digital narratives.</p>
+    </section>
+
+    <section id="about">
+        <h2>THE BACKGROUND</h2>
+        <div class="bento-grid">
+            <div class="bento-item wide">
+                <h3>Visual Communication</h3>
+                <p>Expertise in typography and layout systems. I believe design is a language where every pixel carries intent and logic.</p>
+            </div>
+            <div class="bento-item">
+                <h3>Strategy</h3>
+                <p>Miro-based workshops and design thinking to solve complex visual problems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>TOOLKIT</h2>
+        <div class="bento-grid">
+            <div class="bento-item">
+                <h3>Adobe Suite</h3>
+                <p>InDesign, Illustrator, Photoshop. Precision in print and branding.</p>
+            </div>
+            <div class="bento-item">
+                <h3>Product</h3>
+                <p>Figma & Responsive Web. Building human-centric interfaces.</p>
+            </div>
+            <div class="bento-item">
+                <h3>Gen AI</h3>
+                <p>Integrating Midjourney & DALL-E into creative workflows.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2>SELECTED WORK</h2>
+        <div class="work-grid">
+            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800')" data-tilt onclick="openPop('Typographic Narrative', 'An exploration of expressive type and grid structures.')">
+                <div class="project-content">
+                    <h3>Typographic Poster</h3>
+                  <div class="project-card" onclick="window.location.href='project-detail.html'">
+                    
+</div>
+                </div>
+            </div>
+            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800')" data-tilt onclick="openPop('UI/UX System', 'A minimal digital interface built for high-performance creative tools.')">
+                <div class="project-content">
+                    <h3>UI Design</h3>
+                </div>
+            </div>
+            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800')" data-tilt onclick="openPop('Digital Illustration', 'Vector-based narratives focused on color theory.')">
+                <div class="project-content">
+                    <h3>Illustration</h3>
+                </div>
+            </div>
+            
+        </div>
+        
+</div>
+    </section>
+
+    <section id="contact">
+        <h2>CONNECT</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="FULL NAME" required>
+            <input type="email" placeholder="EMAIL ADDRESS" required>
+            <textarea rows="4" placeholder="HOW CAN WE COLLABORATE?"></textarea>
+            <button type="submit" class="mag-btn">SEND MESSAGE</button>
+        </form>
+    </section>
+
+    <div id="pop" class="modal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closePop()">&times;</span>
+            <h2 id="popTitle" style="color: var(--secondary);">Project</h2>
+            <p id="popDesc" style="margin-top: 20px; line-height: 1.6;"></p>
+            <br>
+            <button class="mag-btn" onclick="closePop()">Close Window</button>
+        </div>
+    </div>
+
+    <script>
+        // INIT TILT
+        VanillaTilt.init(document.querySelectorAll(".project-card"), { max: 15, speed: 400, glare: true, "max-glare": 0.3 });
+
+        // CUSTOM CURSOR
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // --- PARTICLE GRAPHICS ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null };
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 120) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
+                    ctx.globalAlpha = 1 - (distance / 120);
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+            draw() {
+                ctx.fillStyle = 'white';
+                ctx.globalAlpha = 0.5;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+        }
+        init();
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- MAGNETIC NAVIGATION ---
+        document.querySelectorAll('.mag-item').forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width/2;
+                const y = e.clientY - rect.top - rect.height/2;
+                item.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = `translate(0px, 0px)`;
+            });
+        });
+
+        // SCROLL PROGRESS
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // THEME TOGGLE
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
+
+        // POP-UP LOGIC
+        function openPop(t, d) {
+            document.getElementById('popTitle').innerText = t;
+            document.getElementById('popDesc').innerText = d;
+            document.getElementById('pop').style.display = 'grid';
+        }
+        function closePop() { document.getElementById('pop').style.display = 'none'; }
+
+        // HERO LOAD ANIMATION
+        window.addEventListener('load', () => {
+            const name = document.getElementById('hero-name');
+            name.style.opacity = "0";
+            setTimeout(() => {
+                name.style.transition = "1.5s ease-out";
+                name.style.opacity = "1";
+            }, 200);
+        });
+    </script>
+</body>
+</html>
