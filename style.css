@@ -43,42 +43,80 @@ h1, h2, h3, .logo {
 }
 
 /* --- BACKGROUND GRAPHICS & CURSOR --- */
-#canvas-bg {
+#custom-cursor {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1; pointer-events: none;
-    opacity: 0.4;
-}
-
-
-.shape {
-    position: fixed;
+    width: 15px; height: 15px;
+    background: var(--secondary);
+    box-shadow: 0 0 20px var(--primary);
     border-radius: 50%;
-    filter: blur(150px);
-    z-index: -2;
-    opacity: 0.2;
-    animation: float 25s infinite alternate;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+}
+#canvas-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+            opacity: 0.4;
+        }
+
+
+.shape { 
+   .shape { position: fixed; border-radius: 50%; filter: blur(150px); z-index: -2; opacity: 0.2; animation: float 25s infinite alternate; }
+        .s1 { width: 600px; height: 600px; background: var(--primary); top: -20%; left: -10%; }
+        .s2 { width: 500px; height: 500px; background: var(--accent-tertiary); bottom: -10%; right: -10%; }
+        
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(100px, 50px); } }
+
 }
 
-.s1 {
-    width: 600px;
-    height: 600px;
-    background: var(--primary);
-    top: -20%;
-    left: -10%;
+/* --- ABOUT SECTION LAYOUT --- */
+.about-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 3rem;
 }
 
-.s2 {
-    width: 500px;
-    height: 500px;
-    background: var(--accent-tertiary);
-    bottom: -10%;
-    right: -10%;
+.profile-frame {
+    flex: 0 0 350px; /* Width of your image */
+    aspect-ratio: 4/5;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
 }
 
-@keyframes float {
-    from { transform: translate(0, 0); }
-    to { transform: translate(100px, 50px); }
+.profile-img {
+    width: 60%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(110%); /* Blends with the moody theme */
+    transition: transform 0.5s ease;
+}
+
+.profile-frame:hover .profile-img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+/* Ensure bento grid takes remaining space */
+#about .bento-grid {
+    flex: 1;
+    margin-top: 0; /* Override previous margin */
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 900px) {
+    .about-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile-frame {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 /* --- WORK CARD GRAPHICS (3D EFFECT) --- */
@@ -124,32 +162,159 @@ h1, h2, h3, .logo {
 .project-card:hover {
     border-color: var(--primary);
 }
-.project-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s ease;
-    filter: grayscale(40%) contrast(90%);
-}
+ .project-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 1.2s scale(1.05); filter: grayscale(40%) contrast(90%);
+              }
+        .project-card:hover .project-img { transform: scale(1.08); filter: grayscale(0%); }
 
-.project-card:hover .project-img {
-    transform: scale(1.08);
-    filter: grayscale(0%);
-}
+        .project-info {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 40px; background: linear-gradient(transparent, rgba(28, 20, 18, 0.9));
+            transform: translateY(20px); opacity: 0; transition: 0.5s;
+        }
+        .project-card:hover .project-info { transform: translateY(0); opacity: 1; }  :root {
+            /* Earthy & Subtle Aesthetic Palette (Derived from Upload) */
+            --bg: #1a0f0e;           /* Deep Espresso */
+            --text: #f2e8da;         /* Bone/Cream */
+            --primary: #c98e82;      /* Muted Terracotta */
+            --secondary: #e8d5c4;    /* Warm Sand */
+            --accent-tertiary: #6b2d26; /* Deep Burnt Sienna */
+            --glass: rgba(242, 232, 218, 0.03);
+            --border: rgba(201, 142, 130, 0.2);
+            --grid-color: rgba(232, 213, 196, 0.05);
+        }
 
-.project-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 40px;
-    background: linear-gradient(transparent, rgba(28, 20, 18, 0.9));
-    transform: translateY(20px);
-    opacity: 0;
-    transition: 0.5s;
-}
+        [data-theme="light"] {
+            --bg: #f2e8da;           /* Cream Background */
+            --text: #1a0f0e;         /* Espresso Text */
+            --glass: rgba(107, 45, 38, 0.05);
+            --border: rgba(26, 15, 14, 0.1);
+        }
 
-.project-card:hover .project-info {
-    transform: translateY(0);
-    opacity: 1;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } 
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            transition: background 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Space Grotesk', sans-serif; }
+
+        /* --- GRAPHIC OVERLAYS --- */
+        #custom-cursor {
+            position: fixed;
+            width: 15px; height: 15px;
+            background: var(--secondary);
+            box-shadow: 0 0 20px var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        #canvas-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+            filter: saturate(1.2) contrast(1.0) brightness(1.0);
+            opacity: 0.5;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0; height: 4px;
+            background: linear-gradient(to right, var(--accent-tertiary), var(--primary), var(--secondary));
+            z-index: 1001; width: 0%;
+        }
+
+        .shape { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -2; opacity: 0.2; animation: float 20s infinite alternate; }
+        .s1 { width: 500px; height: 500px; background: var(--accent-tertiary); top: -10%; left: -10%; }
+        .s2 { width: 400px; height: 400px; background: var(--primary); bottom: -5%; right: -5%; animation-delay: -5s; }
+        
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(80px, 40px); } }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%;
+            backdrop-filter: blur(20px);
+            z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text); 
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s; opacity: 0.7;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--primary); }
+
+        .theme-btn {
+            background: var(--glass); border: 1px solid var(--border);
+            color: var(--text); padding: 5px 15px; border-radius: 20px; cursor: pointer;
+            font-weight: bold; font-size: 0.7rem;
+        }
+
+        /* --- HERO --- */
+        section { padding: 120px 8%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+
+        .hero h1 {
+            font-size: clamp(4rem, 15vw, 9rem);
+            line-height: 0.8; letter-spacing: -4px;
+            margin-bottom: 2rem;
+            transition: 0.3s;
+        }
+        .hero h1:hover { color: var(--secondary); text-shadow: 6px 6px var(--accent-tertiary); }
+
+        .hero p { max-width: 600px; font-size: 1.4rem; opacity: 0.8; border-left: 3px solid var(--primary); padding-left: 20px; }
+
+        /* --- BENTO GRID --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+        .bento-item {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 3rem; border-radius: 24px;
+            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .bento-item:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(201, 142, 130, 0.05); }
+        .wide { grid-column: span 2; }
+        .bento-item h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+
+        /* --- WORK CARDS --- */
+        .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .project-card { 
+            width: 100%; aspect-ratio: 16/10; background-size: cover; background-position: center;
+            border-radius: 24px; display: flex; align-items: flex-end; padding: 40px; 
+            overflow: hidden; cursor: pointer; transform-style: preserve-3d;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        /* Dark overlay for text readability */
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(26, 15, 14, 0.8), transparent);
+            z-index: 1;
+        }
+        .project-content { position: relative; z-index: 2; transform: translateZ(60px); color: #fff; }
+
+        /* --- CONTACT & MODAL --- */
+        .contact-form { display: grid; gap: 1.5rem; max-width: 600px; }
+        input, textarea {
+            background: transparent; border: none; border-bottom: 1px solid var(--border);
+            padding: 1rem; color: var(--text); font-size: 1rem; font-family: inherit;
+        }
+        input:focus { outline: none; border-bottom-color: var(--secondary); }
+        .mag-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 1.2rem 2.5rem; width: fit-content; margin-top: 1rem;
+            font-weight: bold; border-radius: 50px; transition: 0.3s;
+        }
+        .mag-btn:hover { background: var(--secondary); transform: scale(1.05); color: #000; }
+        .modal { position: fixed; inset: 0; background: rgba(26, 15, 14, 0.95); display: none; place-items: center; z-index: 2000; backdrop-filter: blur(10px); }
+        .modal-box { background: var(--bg); border: 1px solid var(--primary); padding: 50px; border-radius: 30px; max-width: 600px; position: relative; }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; }

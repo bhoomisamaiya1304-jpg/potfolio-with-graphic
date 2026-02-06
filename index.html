@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhoomi Samaiya | Visual Systems & AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    
 </head>
 <body data-theme="dark">
 
@@ -22,7 +23,7 @@
         <div class="nav-links">
             <a href="#home" class="mag-item">Home</a>
             <a href="#about" class="mag-item">About</a>
-            <a href="#skills" class="mag-item">Toolkit</a>
+            <a href="#skills" class="mag-item">Skills</a>
             <a href="#work" class="mag-item">Work</a>
             <button class="theme-btn" onclick="toggleTheme()">◑ MODE</button>
         </div>
@@ -33,31 +34,33 @@
         <p>Visual Communication Designer merging Typography, Print Systems, and Generative AI to craft digital narratives.</p>
     </section>
 
-    <section id="about">
-        <h2>THE BACKGROUND</h2>
+   <section id="about">
+    <h2>About Me</h2>
+   
+    <div class="about-layout">
+        <div class="profile-frame" data-tilt>
+            <img src="PROFILE.jpg" alt="Bhoomi Samaiya" class="CONTAINER">-
+        </div>
+
         <div class="bento-grid">
             <div class="bento-item wide">
                 <h3>Visual Communication</h3>
                 <p>Expertise in typography and layout systems. I believe design is a language where every pixel carries intent and logic.</p>
             </div>
             <div class="bento-item">
-                <h3>Strategy</h3>
-                <p>Miro-based workshops and design thinking to solve complex visual problems.</p>
-            </div>
+                <h3>Generative AI</h3>
+                <p>Integrating Gen AI tools like Midjourney and DALL-E into creative workflows to push the boundaries of visual storytelling.</p>
         </div>
-    </section>
-
+    </div>
+</section>
     <section id="skills">
-        <h2>TOOLKIT</h2>
+        <h2>SKILLS</h2>
         <div class="bento-grid">
             <div class="bento-item">
                 <h3>Adobe Suite</h3>
-                <p>InDesign, Illustrator, Photoshop. Precision in print and branding.</p>
+                <p>InDesign, Illustrator, Photoshop.</p>
             </div>
-            <div class="bento-item">
-                <h3>Product</h3>
-                <p>Figma & Responsive Web. Building human-centric interfaces.</p>
-            </div>
+        
             <div class="bento-item">
                 <h3>Gen AI</h3>
                 <p>Integrating Midjourney & DALL-E into creative workflows.</p>
@@ -66,31 +69,41 @@
     </section>
 
     <section id="work">
-        <h2>SELECTED WORK</h2>
-        <div class="work-grid">
-            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800')" data-tilt onclick="openPop('Typographic Narrative', 'An exploration of expressive type and grid structures.')">
-                <div class="project-content">
-                    <h3>Typographic Poster</h3>
-                  <div class="project-card" onclick="window.location.href='project-detail.html'">
-                    
-</div>
-                </div>
-            </div>
-            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800')" data-tilt onclick="openPop('UI/UX System', 'A minimal digital interface built for high-performance creative tools.')">
-                <div class="project-content">
-                    <h3>UI Design</h3>
-                </div>
-            </div>
-            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800')" data-tilt onclick="openPop('Digital Illustration', 'Vector-based narratives focused on color theory.')">
-                <div class="project-content">
-                    <h3>Illustration</h3>
-                </div>
-            </div>
-            
+  <h2>MY WORK</h2>
+
+  <div class="work-grid">
+
+    <div class="project-card"
+      style="background-image: url(Typo.jpg)"
+      data-tilt
+      onclick="window.location.href='typographic.html'">
+        <div class="project-content">
+            <h3>Typography</h3>
         </div>
-        
-</div>
-    </section>
+    </div>
+
+    <div class="project-card"
+      style="background-image: url(CIM.png)"
+      data-tilt
+      onclick="openPop('UI/UX System', 'A minimal digital interface built for high-performance creative tools.')">
+      <div class="project-content">
+        <h3>Creative Image Making</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+      style="background-image: url(Illustration.png
+        )"
+      onclick="openPop('Digital Illustration', 'Vector-based narratives focused on color theory.')">
+      <div class="project-content">
+        <h3>Illustration</h3>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 
     <section id="contact">
         <h2>CONNECT</h2>
@@ -105,7 +118,7 @@
     <div id="pop" class="modal">
         <div class="modal-box">
             <span class="close-btn" onclick="closePop()">&times;</span>
-            <h2 id="popTitle" style="color: var(--secondary);">Project</h2>
+            <h2 id="popTitle" style="color: var(--primary);">Project</h2>
             <p id="popDesc" style="margin-top: 20px; line-height: 1.6;"></p>
             <br>
             <button class="mag-btn" onclick="closePop()">Close Window</button>
@@ -160,7 +173,8 @@
                 let distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance < 120) {
                     ctx.beginPath();
-                    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--secondary');
+                    // Using primary terracotta for connections
+                    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary');
                     ctx.globalAlpha = 1 - (distance / 120);
                     ctx.lineWidth = 0.5;
                     ctx.moveTo(this.x, this.y);
@@ -169,8 +183,8 @@
                 }
             }
             draw() {
-                ctx.fillStyle = 'white';
-                ctx.globalAlpha = 0.5;
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text');
+                ctx.globalAlpha = 0.3;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -178,6 +192,7 @@
         }
 
         function init() {
+            particles = [];
             for (let i = 0; i < 80; i++) particles.push(new Particle());
         }
         init();
