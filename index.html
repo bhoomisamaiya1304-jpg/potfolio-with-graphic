@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhoomi Samaiya | Visual Systems & AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     
 </head>
 <body data-theme="dark">
@@ -28,40 +28,45 @@
             <button class="theme-btn" onclick="toggleTheme()">◑ MODE</button>
         </div>
     </nav>
-
+    
+<section style="overflow: hidden;"> <!-- Prevents scrollbars during pop-up animation -->
+    <span class="section-number">01 //</span>
     <section id="home" class="hero">
         <h1 id="hero-name">BHOOMI<br>SAMAIYA</h1>
-        <p>Visual Communication Designer merging Typography, Print Systems, and Generative AI to craft digital narratives.</p>
+        <p class="reveal">Visual Communication Designer merging Typography, Print Systems, and Generative AI to craft digital narratives.</p>
     </section>
 
-   <section id="about">
-    <h2>About Me</h2>
-   
+   <section id="about" class="reveal">
+    <h2 class="reveal">About Me</h2>
+    
     <div class="about-layout">
-        <div class="profile-frame" data-tilt>
-            <img src="profile.jpg" alt="Bhoomi Samaiya" class="CONTAINER">-
-        </div>
-
-        <div class="bento-grid">
-            <div class="bento-item wide">
+        <div class="about-content">
+            <div class="bento-item">
                 <h3>Visual Communication</h3>
                 <p>Expertise in typography and layout systems. I believe design is a language where every pixel carries intent and logic.</p>
             </div>
             <div class="bento-item">
                 <h3>Generative AI</h3>
                 <p>Integrating Gen AI tools like Midjourney and DALL-E into creative workflows to push the boundaries of visual storytelling.</p>
+            </div>
         </div>
+
+        <div class="profile-frame">
+    <div class="scan-line"></div>
+    <div class="corner-spec"></div>
+    <img src="profile.jpg" alt="Bhoomi Samaiya">
+</div>
     </div>
 </section>
+
     <section id="skills">
-        <h2>SKILLS</h2>
+        <h2 class="reveal">SKILLS</h2>
         <div class="bento-grid">
-            <div class="bento-item">
+            <div class="bento-item reveal">
                 <h3>Adobe Suite</h3>
                 <p>InDesign, Illustrator, Photoshop.</p>
             </div>
-        
-            <div class="bento-item">
+            <div class="bento-item reveal">
                 <h3>Gen AI</h3>
                 <p>Integrating Midjourney & DALL-E into creative workflows.</p>
             </div>
@@ -69,51 +74,39 @@
     </section>
 
     <section id="work">
-  <h2>MY WORK</h2>
+        <h2 class="reveal">MY WORK</h2>
+        <div class="work-grid">
+            <div class="project-card reveal" style="background-image: url(typo.jpg)" data-tilt onclick="window.location.href='typographic.html'">
+                <div class="project-content">
+                    <h3>Typography</h3>
+                </div>
+            </div>
 
-  <div class="work-grid">
+            <div class="project-card reveal" style="background-image: url(cim.png)" data-tilt onclick="window.location.href='cim.html'">
+                <div class="project-content">
+                    <h3>Creative Image Making</h3>
+                </div>
+            </div>
 
-    <div class="project-card"
-      style="background-image: url(typop.jpg)"
-      data-tilt
-      onclick="window.location.href='typographic.html'">
-        <div class="project-content">
-            <h3>Typography</h3>
+            <div class="project-card reveal" style="background-image: url(illustration.png)" data-tilt onclick="window.location.href='illustration.html'">
+                <div class="project-content">
+                    <h3>Illustration</h3>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="project-card"
-      style="background-image: url(cim.png)"
-      data-tilt
-      onclick="openPop(window.location.href='cim.html', 'Creative Image Making - A project exploring the fusion of traditional print aesthetics with generative AI techniques to create dynamic visual narratives.')">
-      <div class="project-content">
-        <h3>Creative Image Making</h3>
-      </div>
-    </div>
-
-    <div class="project-card"
-      style="background-image: url(illustration.png
-        )"
-      onclick="openPop(window.location.href='illustration.html', 'Digital Illustration - Vector-based narratives focused on color theory.')">
-      <div class="project-content">
-        <h3>Illustration</h3>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
+    </section>
 
     <section id="contact">
-        <h2>CONNECT</h2>
-        <form class="contact-form">
+        <h2 class="reveal">CONNECT</h2>
+        <form class="contact-form reveal">
             <input type="text" placeholder="FULL NAME" required>
-            <input type="email" placeholder="EMAIL ADDRESS" required>
+            <input type="email" value="bhoomisamiya@1304gmail.com" readonly required>
             <textarea rows="4" placeholder="HOW CAN WE COLLABORATE?"></textarea>
             <button type="submit" class="mag-btn">SEND MESSAGE</button>
         </form>
     </section>
+
+   
 
     <div id="pop" class="modal">
         <div class="modal-box">
@@ -126,98 +119,111 @@
     </div>
 
     <script>
-        // INIT TILT
+        // 1. IMPROVED HERO REVEAL
+        window.addEventListener('load', () => {
+            const name = document.getElementById('hero-name');
+            setTimeout(() => {
+                name.style.transition = "all 1.2s cubic-bezier(0.23, 1, 0.32, 1)";
+                name.style.opacity = "1";
+                name.style.transform = "translateY(0)";
+                name.style.filter = "blur(0)";
+            }, 300);
+        });
+
+        // 2. SCROLL REVEAL LOGIC
+        function revealOnScroll() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", revealOnScroll);
+
+        // 3. CURSOR INTERACTION ON HOVER
+        document.querySelectorAll('.mag-item, .project-card, .mag-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.getElementById('custom-cursor').style.transform = 'scale(2.5)';
+                document.getElementById('custom-cursor').style.background = 'rgba(255,255,255,0.2)';
+            });
+            el.addEventListener('mouseleave', () => {
+                document.getElementById('custom-cursor').style.transform = 'scale(1)';
+                document.getElementById('custom-cursor').style.background = 'var(--secondary)';
+            });
+        });
+
+        // --- KEEPING YOUR ORIGINAL SCRIPT LOGIC BELOW ---
         VanillaTilt.init(document.querySelectorAll(".project-card"), { max: 15, speed: 400, glare: true, "max-glare": 0.3 });
 
-        // CUSTOM CURSOR
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // --- PARTICLE GRAPHICS ---
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const mouse = { x: null, y: null };
+      const canvas = document.getElementById('canvas-bg');
+const ctx = canvas.getContext('2d');
+let mouse = { x: 0, y: 0 };
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+// Get colors from CSS variables
+const getThemeColor = (variable) => getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
 
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        });
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+resize();
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+// Aura Logic
+class AuraNode {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 200 + 100;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.angle = Math.random() * Math.PI * 2;
+    }
+    draw() {
+        this.angle += 0.005;
+        // Subtle floating movement
+        this.x = this.baseX + Math.cos(this.angle) * 50;
+        this.y = this.baseY + Math.sin(this.angle) * 50;
 
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 120) {
-                    ctx.beginPath();
-                    // Using primary terracotta for connections
-                    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary');
-                    ctx.globalAlpha = 1 - (distance / 120);
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.stroke();
-                }
-            }
-            draw() {
-                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text');
-                ctx.globalAlpha = 0.3;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+        let dist = Math.hypot(mouse.x - this.x, mouse.y - this.y);
+        let opacity = Math.max(0, 0.15 - dist / 1000);
 
-        function init() {
-            particles = [];
-            for (let i = 0; i < 80; i++) particles.push(new Particle());
-        }
-        init();
+        let grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+        grad.addColorStop(0, getThemeColor('--primary') + '44'); // Coral
+        grad.addColorStop(1, 'transparent');
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
+        ctx.globalAlpha = opacity;
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
 
-        // --- MAGNETIC NAVIGATION ---
-        document.querySelectorAll('.mag-item').forEach(item => {
-            item.addEventListener('mousemove', (e) => {
-                const rect = item.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width/2;
-                const y = e.clientY - rect.top - rect.height/2;
-                item.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-            });
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = `translate(0px, 0px)`;
-            });
-        });
+const nodes = Array.from({ length: 15 }, () => new AuraNode());
 
-        // SCROLL PROGRESS
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Add a slight "trail" effect
+    ctx.fillStyle = getThemeColor('--bg');
+    ctx.globalAlpha = 0.1;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    nodes.forEach(node => node.draw());
+    requestAnimationFrame(animate);
+}
+animate();
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -225,30 +231,18 @@
             document.getElementById("progress-bar").style.width = scrolled + "%";
         };
 
-        // THEME TOGGLE
         function toggleTheme() {
             const body = document.body;
             const current = body.getAttribute('data-theme');
             body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
         }
 
-        // POP-UP LOGIC
         function openPop(t, d) {
             document.getElementById('popTitle').innerText = t;
             document.getElementById('popDesc').innerText = d;
             document.getElementById('pop').style.display = 'grid';
         }
         function closePop() { document.getElementById('pop').style.display = 'none'; }
-
-        // HERO LOAD ANIMATION
-        window.addEventListener('load', () => {
-            const name = document.getElementById('hero-name');
-            name.style.opacity = "0";
-            setTimeout(() => {
-                name.style.transition = "1.5s ease-out";
-                name.style.opacity = "1";
-            }, 200);
-        });
     </script>
 </body>
 </html>
