@@ -3,72 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Image Making</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
- 
+    <title>CIM | Creative Image Making</title>
     <style>
-        * {
+        /* RESET & BASIC STYLES */
+        body {
+            background-color: #0F1626 !important;
+            color: #F5F5F5 !important;
+            font-family: sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            display: block !important;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        nav {
+            padding: 40px 8%;
+            background: rgba(255,255,255,0.05);
         }
 
-        main {
-            flex: 1;
-            padding: 40px 20px;
+        .container {
+            padding: 60px 8%;
         }
 
-        footer.next-project {
-            padding: 40px 20px;
-            border-top: 1px solid #ccc;
-            text-align: center;
-        }
-
-        footer.next-project p {
+        h1 {
+            font-size: 4rem;
+            color: #FF533D;
             margin-bottom: 20px;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
         }
 
-        .next-link {
-            text-decoration: none;
-            color: #000;
-            font-size: 1.2rem;
-            transition: opacity 0.3s ease;
+        /* THE GRID */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
         }
 
-        .next-link:hover {
-            opacity: 0.7;
+        .gallery-item {
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #151d2e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            display: block;
+            background: #000;
+        }
+
+        .caption {
+            padding: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 800px) {
+            .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="back-btn">← BACK TO INDEX</a>
-        <div class="logo">BS.</div>
+        <a href="index.html" style="color: #AB987A; text-decoration: none;">← BACK TO HOME</a>
     </nav>
 
-    <header class="project-hero">
-        <div>
-            <span class="project-num" style="color: var(--primary);">Project 01</span>
-            <h1>UI<br>NARRATIVE</h1>
-        </div>
+    <div class="container">
+        <h1>CREATIVE IMAGE MAKING</h1>
+        <p>If you see this text, the code is working. If images are missing, check filenames.</p>
 
-    <main>
-        <!-- Your content here -->
-    </main>
+        <main class="gallery-grid">
+            <div class="gallery-item">
+                <div class="project-card" onclick="window.location.href='symbols.html'"></div>
+                <img src="symbols5.jpg" alt="Symbols">
+                <div class="caption">01 // Symbols</div>
+            </div>
 
-    <footer class="next-project">
-        <p style="margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 2px;">NEXT PROJECT</p>
-        <a href="Illustration.html" class="next-link">Illustration →</a>
-    </footer>
+            <div class="gallery-item">
+                <div class="project-card" onclick="window.location.href='icons.html'"></div>
+                <img src="icons4.jpg" alt="Icons">
+                <div class="caption">02 // Icons</div>
+            </div>
+        </main>
+    </div>
+<footer>
+    <p style="font-size: 0.7rem; letter-spacing: 2px; opacity: 0.4;">© 2026 BHOOMI SAMAIYA // ALL RIGHTS RESERVED</p>
+</footer>
+ 
 </body>
 </html>
