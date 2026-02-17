@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booklet Design | Bhoomi Samaiya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F1626;
+            --accent: #FF533D; /* Coral from your UI */
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body { background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; margin: 0; padding: 0; }
+        
+        nav { padding: 2rem 8%; display: flex; justify-content: space-between; position: fixed; width: 84%; z-index: 100; backdrop-filter: blur(10px); }
+        nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; }
+        
+        /* 1. Limit the overall width of the gallery so images don't stretch too large */
+  
+    .container {
+        padding: 60px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+        
+        h1 { font-family: 'Space Grotesk'; font-size: 8vw; margin-bottom: 2rem; line-height: 0.9; }
+        .desc { max-width: 600px; color: #AB987A; font-size: 1.2rem; margin-bottom: 5rem; border-left: 2px solid var(--accent); padding-left: 20px; }
+
+         /* THE ROW FIX: This makes them sit side-by-side like your screenshot */
+    .editorial-row {
+        display: flex;
+        flex-wrap: wrap; /* Allows them to wrap to the next line on small screens */
+        gap: 20px;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 40px;
+    }
+
+
+    .gallery-grid { 
+        display: grid; 
+        /* Three equal columns */
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px; 
+    }
+
+ 
+
+   
+
+    .gallery-item {
+        background: var(--glass);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        /* This controls the width: 45% means roughly 2 per row */
+        flex: 1 1 45%; 
+        max-width: 600px; 
+    }
+
+    /* THE SIZE FIX: This keeps them from getting too big */
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        max-height: 70vh; /* Limits height to 70% of the screen */
+        object-fit: contain; /* Ensures the whole image is visible */
+        background: #0b0f19; /* Matches your dark UI theme */
+        display: block;
+    }
+
+    .caption {
+        padding: 15px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 800px) {
+        .gallery-item { flex: 1 1 100%; } /* Stack on mobile */
+    }
+
+   
+
+
+    
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">BS.</div>
+    <a href="typographic.html">← BACK TO TYPOGRAPHIC STUDY</a>
+</nav>
+
+<div class="container">
+    <h1><br>WALSH</h1>
+    <p class="desc">A multi-page editorial study on Jessica Walsh's design philosophy. Exploring vibrant color theory, kinetic typography, and the balance between chaos and structure.</p>
+
+    <main class="gallery-grid">
+    <div class="gallery-item wide">
+        <img src="booklayout.png" alt="Jessica Walsh Booklet Cover">
+        
+    </div>
+
+    <div class="gallery-item">
+        <img src="booklayout2.png" alt="Introduction">
+       
+    </div>
+    <div class="gallery-item">
+        <img src="booklayout4.png" alt="Philosophy">
+       
+    </div>
+    <div class="gallery-item">
+        <img src="booklayout5.png" alt="Influence">
+    
+    </div>
+
+    <div class="gallery-item">
+        <img src="booklayout6.png" alt="Legacy">
+       
+    </div>
+    <div class="gallery-item wide">
+        <img src="booklayout8.png" alt="Manifesto">
+        </div>
+    </div>
+</main>
+</div>
+
+ <footer>
+        © 2026 Bhoomi Samaiya
+    </footer>
+
+
+</body>
+</html>
